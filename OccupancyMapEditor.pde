@@ -196,15 +196,15 @@ void saveMapTo(File file) {
 void saveHeaderTo(File file) {
   PrintWriter output = createWriter(file.getAbsolutePath());
   output.println("// Auto-generated occupancy map");
-  output.println("const uint8_t occupancy_map[" + rows + "][" + cols + "] = {");
-  for (int y = 0; y < rows; y++) {
+  output.println("const uint8_t occupancy_map[" + cols + "][" + rows + "] = {");
+  for (int x = 0; x < cols; x++) {
     String line = "  {";
-    for (int x = 0; x < cols; x++) {
+    for (int y = 0; y < rows; y++) {
       line += grid[y][x];
-      if (x < cols - 1) line += ", ";
+      if (y < rows - 1) line += ", ";
     }
     line += "}";
-    if (y < rows - 1) line += ",";
+    if (x < cols - 1) line += ",";
     output.println(line);
   }
   output.println("};");
